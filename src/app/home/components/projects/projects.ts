@@ -1,34 +1,48 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ProjectCard } from "./projectCard/projectCard";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-projects',
-  imports: [ProjectCard],
+  imports: [MatIconModule],
   templateUrl: './projects.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Projects {
-  projects = signal([
+  steps = signal([
     {
-      title: "FinTrack Pro",
-      category: "Fintech",
+      number: '01',
+      title: 'Consulta Inicial',
       description:
-        "Plataforma de gestión financiera empresarial con análisis predictivo y reportes en tiempo real.",
-      metrics: "300% ROI para clientes",
-       },
+        'Escuchamos tus necesidades y objetivos de negocio para definir juntos el alcance y la visión del proyecto.',
+      icon: 'handshake',
+    },
     {
-       title: "MediConnect",
-       category: "HealthTech",
-       description:
-         "Sistema integral de gestión hospitalaria con telemedicina y expediente clínico electrónico.",
-       metrics: "50+ hospitales conectados",
-     },
+      number: '02',
+      title: 'Estrategia y Diseño',
+      description:
+        'Diseñamos la arquitectura técnica, prototipos y un roadmap detallado con tiempos y entregables claros.',
+      icon: 'draw',
+    },
     {
-       title: "LogiFlow",
-       category: "Logística",
-       description:
-         "Solución de optimización logística con tracking en tiempo real e inteligencia artificial.",
-       metrics: "40% reducción en costos",
-     },
-  ])
+      number: '03',
+      title: 'Desarrollo Ágil',
+      description:
+        'Construimos tu solución con sprints semanales, demos frecuentes y comunicación constante en cada fase.',
+      icon: 'code',
+    },
+    {
+      number: '04',
+      title: 'Entrega y Soporte',
+      description:
+        'Lanzamos tu producto con pruebas exhaustivas y brindamos acompañamiento continuo post-lanzamiento.',
+      icon: 'rocket_launch',
+    },
+  ]);
+
+  stats = signal([
+    { value: '98%', label: 'Satisfacción del cliente' },
+    { value: '< 24h', label: 'Tiempo de respuesta' },
+    { value: '100%', label: 'Entregas a tiempo' },
+    { value: '24/7', label: 'Soporte disponible' },
+  ]);
 }

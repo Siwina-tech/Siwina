@@ -8,24 +8,22 @@ import { FooterLinks } from './types/footer.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {
-
   footerLinks = signal<FooterLinks>({
     servicios: [
-      { name: "Desarrollo Web", href: "#" },
-      { name: "Apps Móviles", href: "#" },
-      { name: "Sistemas Empresariales", href: "#" },
-      { name: "Consultoría", href: "#" },
+      { name: 'Desarrollo Web', href: '#' },
+      { name: 'Apps Móviles', href: '#' },
+      { name: 'Sistemas Empresariales', href: '#' },
+      { name: 'Consultoría', href: '#' },
     ],
     empresa: [
-      { name: "Nosotros", href: "#nosotros" },
-      { name: "Proyectos", href: "#proyectos" },
-      { name: "Blog", href: "#" },
-      { name: "Carreras", href: "#" },
+      { name: 'Nosotros', href: '#nosotros' },
+      { name: 'Proceso', href: '#proceso' },
+      { name: 'Blog', href: '#' },
+      { name: 'Carreras', href: '#' },
     ],
     legal: [
-      { name: "Privacidad", href: "#" },
-      { name: "Términos", href: "#" },
+      { name: 'Privacidad', href: '#' },
+      { name: 'Términos', href: '#' },
     ],
-  })
-
- }
+  });
+}
