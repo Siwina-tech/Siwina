@@ -1,7 +1,20 @@
-<section class="relative min-h-auto overflow-hidden bg-white pt-24">
+<section class="relative min-h-auto overflow-hidden bg-[#0f0b16] pt-24">
+  <!-- Imagen de fondo -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style="
+      background-image: url('https://res.cloudinary.com/daezwxzg1/image/upload/v1772583219/VistapreviaPhotoshop_Imagenn_v5ycrg.webp');
+    "
+  ></div>
+
+  <!-- Overlay morado/negro -->
+  <div
+    class="absolute inset-0 bg-linear-to-br from-black/80 via-[#1a1026]/75 to-[#902bcc]/45"
+  ></div>
+
   <!-- Fondo con grid -->
   <div
-    class="absolute inset-0 bg-[linear-gradient(to_right,rgba(144,43,204,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(144,43,204,0.08)_1px,transparent_1px)] bg-size-[5rem_5rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"
+    class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-size-[5rem_5rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"
   ></div>
 
   <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
@@ -16,17 +29,17 @@
 
       <!-- Título -->
       <h1
-        class="max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl"
+        class="max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
       >
         Construimos el
-        <span class="bg-gradient-to-r from-[#902bcc] to-[#7b22b0] bg-clip-text text-transparent">
+        <span class="bg-linear-to-r from-[#902bcc] to-[#7b22b0] bg-clip-text text-transparent">
           software
         </span>
         que impulsa tu negocio
       </h1>
 
       <!-- Descripción -->
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600 lg:text-xl">
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-gray-200 lg:text-xl">
         Transformamos ideas en soluciones digitales de alto impacto. Desarrollo web, aplicaciones
         móviles y sistemas empresariales diseñados para escalar.
       </p>
@@ -58,7 +71,7 @@
 
         <a
           href="#proceso"
-          class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-8 py-3.5 text-base font-semibold text-gray-700 transition-all hover:border-[#902bcc]/30 hover:bg-[#902bcc]/5"
+          class="inline-flex items-center rounded-lg border border-white/30 bg-white/10 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-all hover:border-[#902bcc]/50 hover:bg-[#902bcc]/20"
         >
           Conoce nuestro proceso
         </a>
