@@ -1,7 +1,3 @@
 User-agent: *
 Allow: /
-
-# Bloquea rutas internas si existen
-Disallow: /admin/
-Disallow: /api/
-Disallow: /private/
+Disallow:
