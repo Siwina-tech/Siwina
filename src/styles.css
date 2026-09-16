@@ -372,25 +372,43 @@ body {
       0 14px 30px -12px rgba(21, 3, 41, 0.5);
   }
 
+  /* La foto se declara contenedor para que el panel pueda medirse contra ella. Solo se
+     contiene el eje en linea: el ancho ya le viene impuesto por la rejilla, y el alto
+     lo sigue marcando la imagen. */
+  .product-visual {
+    container-type: inline-size;
+  }
+
   /* Las pantallas de producto se muestran a escala reducida: son un apoyo de la
      foto, no el protagonista. */
   .screen-scale {
     zoom: 0.72;
   }
 
-  /* En movil la foto se encoge con la ventana pero el panel no: mide 275px fijos
-     pase lo que pase, asi que por debajo de `sm` acababa tapandola entera —en la
-     seccion de agentes solo asomaba la cabeza. La escala se baja para devolverle
-     al panel la misma proporcion que tiene en escritorio.
-
-     El 0.5 no es a ojo: la foto pasa de 440px a 295px, o sea un 67% del tamano,
-     y 0.72 x 0.67 = 0.48. El corte en 639px es el mismo punto donde la foto ya
-     cambia de ancho maximo y el panel de sangrado lateral, para que todo el
-     conjunto salte a la vez. */
+  /* Respaldo en dos escalones para navegadores que no entiendan la formula de abajo.
+     El 0.5 no es a ojo: la foto pasa de 440px a 295px en un movil de 375, o sea un
+     67% del tamano, y 0.72 x 0.67 = 0.48. */
   @media (max-width: 639px) {
     .screen-scale {
       zoom: 0.5;
     }
+  }
+
+  /* La escala se calcula a partir del ancho real de la foto, no de la ventana.
+     El panel mide 275px fijos: con una escala fija tapa una fraccion distinta segun
+     lo grande que sea la foto, y en un telefono de 320px llegaba a cubrirle el 45%
+     del area. Escalones fijos no arreglan eso, solo mueven el punto donde falla.
+
+     `tan(atan2(a, b))` devuelve a/b como numero puro: es la unica forma de dividir
+     dos longitudes en CSS, y hace falta porque `zoom` no admite unidades. Con 45cqw
+     —el 45% del ancho del contenedor— el panel ocupa siempre ese 45%, de un movil
+     estrecho a un escritorio. De regalo cuadra con lo que ya habia: en escritorio la
+     foto mide 440px y la formula da 0.45 x 440 / 275 = 0.72, la escala de siempre.
+
+     Va al final y sin @supports a proposito: si el navegador no entiende la funcion
+     descarta la declaracion y se queda con los escalones de arriba. */
+  .screen-scale {
+    zoom: tan(atan2(45cqw, 275px));
   }
 
   /* Despliegue del acordeon.
