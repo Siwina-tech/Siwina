@@ -8,28 +8,42 @@
   <div class="relative mx-auto max-w-[1180px] px-6 py-14 lg:px-10 lg:py-20">
     @if (eyebrowIsProductName()) {
       <!-- El nombre del producto se lee como nombre: caja baja y tamaño de titular
-           pequeño. En versales de 10px parecia una etiqueta de categoria mas. -->
-      <p
-        class="mb-4 text-[22px] leading-none font-extrabold tracking-[-0.025em] text-soft sm:text-[26px]"
-      >
-        {{ eyebrow() }}
-      </p>
+           pequeño. En versales de 10px parecia una etiqueta de categoria mas.
+           El icono queda oculto a los lectores de pantalla: el nombre va al lado. -->
+      <div class="rise-in mb-4 flex items-center gap-3">
+        @if (logoSrc()) {
+          <img
+            [src]="logoSrc()"
+            alt=""
+            aria-hidden="true"
+            width="192"
+            height="192"
+            decoding="async"
+            class="h-11 w-11 shrink-0 sm:h-12 sm:w-12"
+          />
+        }
+        <p class="text-[22px] leading-none font-extrabold tracking-[-0.025em] text-soft sm:text-[26px]">
+          {{ eyebrow() }}
+        </p>
+      </div>
     } @else {
-      <p class="mb-6 font-mono text-[10.5px] font-medium tracking-[0.18em] text-soft uppercase">
+      <p class="rise-in mb-6 font-mono text-[10.5px] font-medium tracking-[0.18em] text-soft uppercase">
         {{ eyebrow() }}
       </p>
     }
 
     <h1
-      class="max-w-[860px] text-[32px] leading-[1.06] font-extrabold tracking-[-0.035em] text-white sm:text-[42px] lg:text-[50px]"
+      class="rise-in max-w-[860px] text-[32px] leading-[1.06] font-extrabold tracking-[-0.035em] text-white [animation-delay:60ms] sm:text-[42px] lg:text-[50px]"
     >
       {{ heading() }}
     </h1>
 
-    <p class="mt-6 max-w-[600px] text-[16.5px] leading-relaxed text-pale">{{ lead() }}</p>
+    <p class="rise-in mt-6 max-w-[600px] text-[16.5px] leading-relaxed text-pale [animation-delay:140ms]">
+      {{ lead() }}
+    </p>
 
     @if (highlights().length) {
-      <ul class="mt-8 flex flex-wrap gap-2.5">
+      <ul class="rise-in mt-8 flex flex-wrap gap-2.5 [animation-delay:180ms]">
         @for (highlight of highlights(); track highlight) {
           <li class="rounded-full bg-white/12 px-3.5 py-1.5 text-[13px] font-semibold text-white">
             {{ highlight }}
@@ -38,7 +52,7 @@
       </ul>
     }
 
-    <div class="mt-9 flex flex-wrap items-center gap-3">
+    <div class="rise-in mt-9 flex flex-wrap items-center gap-3 [animation-delay:220ms]">
       <a
         [href]="ctaHref()"
         target="_blank"

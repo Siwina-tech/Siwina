@@ -210,7 +210,15 @@ body {
        estirandose sola. Todo el recorrido vertical se hace con translate en la
        barra, que no participa en el flujo. Los laterales si pueden animarse: el
        ancho no realimenta al scroll. */
-    padding: var(--sheet-gap) var(--sheet-gap) 0;
+    padding-block: var(--sheet-gap) 0;
+
+    /* Suelta, la pildora se detiene donde se detienen las laminas. El header sigue
+       ocupando toda la ventana —lo necesita para sangrar cuando se pega— asi que el
+       tope se consigue con el padding y no con un max-width: reproduce el mismo
+       calculo que `main`, que se capa en --shell-max y se centra, mas el gap que
+       separa las laminas del borde. Por debajo del tope el max() deja pasar el gap
+       a secas y nada cambia. */
+    padding-inline: calc(max(0px, (100% - var(--shell-max)) / 2) + var(--sheet-gap));
   }
 
   /* La transicion se arma un fotograma despues de fijar el estado inicial. Sin esta
@@ -264,18 +272,96 @@ body {
       0 10px 22px -14px rgba(21, 3, 41, 0.55);
   }
 
-  /* El menu movil acompaña a la barra en el mismo desplazamiento y pierde el radio.
-     Conserva su margen de 8px: anularlo volveria a cambiar el alto del header
-     mientras el menu esta abierto, que es el acoplamiento que acabamos de quitar. */
-  .navbar[data-stuck='true'] .navbar__menu {
-    translate: 0 calc(-1 * var(--sheet-gap));
-    border-radius: 0;
+  /* El menu conserva SIEMPRE su forma flotante, tambien con la barra pegada: sigue
+     siendo una tarjeta redondeada y metida hacia dentro aunque la barra ocupe ya todo
+     el ancho.
+
+     Va DENTRO del flujo a proposito: al abrirse crece el header y empuja la pagina
+     hacia abajo, que es el gesto que se quiere. Lo que se anima es justo eso — la
+     altura — para que el empujon sea gradual y no un salto.
+
+     El alto va de 0 a `auto`, que se puede interpolar gracias al interpolate-size de
+     :root. El relleno y el margen superior tambien parten de cero: si no, el menu
+     cerrado seguiria ocupando 24px y el header nunca mediria lo que debe.
+
+     La forma vive aqui y no como utilidades en la plantilla: las utilidades de Tailwind
+     van en una capa posterior a components y le ganan a cualquier regla de este archivo
+     pasara lo que pasara con la especificidad. */
+  .navbar__menu {
+    border-radius: 28px;
+    overflow: hidden;
+    padding-inline: 0.5rem;
+
+    /* Sombra propia y no la de .floating-bar, aunque se parezcan: esa se acorta cuando
+       la barra se pega, y el menu no se pega nunca. Va un punto mas profunda que la de
+       la barra porque el menu es una superficie mucho mayor y cae sobre secciones
+       claras, donde un panel blanco sin sombra se confunde con el fondo. El filo de
+       arriba lo marca la linea de 1px: sobre blanco puro la sombra difusa sola no
+       basta para separarlo. No necesita transicion — al abrirse entra con la opacidad
+       del conjunto. */
+    box-shadow:
+      0 0 0 1px rgba(21, 3, 41, 0.06),
+      0 2px 4px rgba(21, 3, 41, 0.1),
+      0 22px 44px -16px rgba(21, 3, 41, 0.55);
+
+    /* Cerrado. `visibility` no necesita allow-discrete: al ocultarse mantiene el
+       elemento visible durante toda la transicion y solo lo retira al final, que es
+       exactamente lo que hace falta para poder animar tambien el cierre. Y retirado,
+       el menu sale del arbol de accesibilidad y deja de ser tabulable. */
+    block-size: 0;
+    padding-block: 0;
+    margin-block-start: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      block-size 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+      padding-block 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-block-start 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0.34s,
+      translate 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-inline 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .navbar[data-animatable='true'] .navbar__menu {
+  .navbar__menu[data-open='true'] {
+    block-size: auto;
+    padding-block: 0.5rem;
+    margin-block-start: 0.5rem;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Pegada la barra, el hueco lateral del menu ya no puede venir del padding del header
+     —ese se va a cero para que la barra sangre hasta el borde— asi que se lo pone el
+     propio menu con su margen. Y sube lo mismo que ha subido la barra, para conservar
+     los 8px de separacion. Los dos animan a la vez y con la misma curva: el menu se
+     queda quieto en su sitio mientras la barra se abre hacia los bordes. */
+  .navbar[data-stuck='true'] .navbar__menu {
+    translate: 0 calc(-1 * var(--sheet-gap));
+    margin-inline: var(--sheet-gap);
+  }
+
+  /* En la barra los iconos van en gris y no en su color. Son tres marcas de empresas
+     distintas —negra, azul, roja— y a 18px, en fila y sobre blanco, competian entre
+     ellas y con el logotipo de Siwina: la barra parecia un cajon de pegatinas. En gris
+     acompanan al texto en vez de disputarselo.
+
+     El color aparece al pasar por encima y se queda en el enlace de la pagina actual,
+     asi que sigue sirviendo de senal —de donde estoy, a donde voy— en lugar de ser
+     decoracion permanente. Misma duracion que el color del texto y que el subrayado,
+     para que el enlace entero reaccione como una sola pieza. */
+  .nav-link__logo {
+    filter: grayscale(1);
+    opacity: 0.5;
     transition:
-      translate 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-      border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      filter 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .nav-link:hover .nav-link__logo,
+  .nav-link--on .nav-link__logo {
+    filter: none;
+    opacity: 1;
   }
 
   /* Barra flotante. Se apoya en la misma logica que .panel, pero con una sombra mas
@@ -290,6 +376,21 @@ body {
      foto, no el protagonista. */
   .screen-scale {
     zoom: 0.72;
+  }
+
+  /* En movil la foto se encoge con la ventana pero el panel no: mide 275px fijos
+     pase lo que pase, asi que por debajo de `sm` acababa tapandola entera —en la
+     seccion de agentes solo asomaba la cabeza. La escala se baja para devolverle
+     al panel la misma proporcion que tiene en escritorio.
+
+     El 0.5 no es a ojo: la foto pasa de 440px a 295px, o sea un 67% del tamano,
+     y 0.72 x 0.67 = 0.48. El corte en 639px es el mismo punto donde la foto ya
+     cambia de ancho maximo y el panel de sangrado lateral, para que todo el
+     conjunto salte a la vez. */
+  @media (max-width: 639px) {
+    .screen-scale {
+      zoom: 0.5;
+    }
   }
 
   /* Despliegue del acordeon.
@@ -506,8 +607,17 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* En propiedades sueltas y NO en la abreviada `animation`. La abreviada reinicia todo
+     lo que no menciona, incluido animation-delay, y esta regla vive fuera de @layer: le
+     ganaba a las utilidades `[animation-delay:...]` de la plantilla pasara lo que pasara
+     con la especificidad. El resultado era que los escalonados no existian y toda la
+     cabecera entraba de golpe. Asi el retardo queda libre para que lo ponga quien use
+     la clase. */
   .rise-in {
-    animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-name: rise-in;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
   }
 
   .drift {
