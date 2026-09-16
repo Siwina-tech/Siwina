@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
+import { productLogoOnLight } from '../../brand/product-logos';
+
 interface NavLink {
   readonly label: string;
   readonly path: string;
@@ -29,11 +31,18 @@ export class Navbar {
   // el nombre va acompañado de su descripcion.
   protected readonly links: readonly NavLink[] = [
     { label: 'Zemli', path: '/pos' },
-    { label: 'Soy Alondra', path: '/agentes-ia' },
     { label: 'Mesa Origen', path: '/plataforma-ventas' },
+    { label: 'Soy Alondra', path: '/agentes-ia' },
     { label: 'Blog', path: '/blog' },
     { label: 'Nosotros', path: '/nosotros' },
   ];
+
+  /**
+   * Icono del producto al que lleva cada enlace, deducido del destino. El menu es
+   * blanco, asi que toca la variante para fondo claro. Blog y Nosotros no son
+   * aplicaciones y devuelven null: se quedan sin icono a proposito.
+   */
+  protected readonly iconoDe = productLogoOnLight;
 
   protected readonly mobileMenuOpen = signal(false);
 

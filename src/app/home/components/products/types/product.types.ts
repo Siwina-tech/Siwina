@@ -35,6 +35,11 @@ export interface Product {
   /** Nombre comercial del producto. */
   readonly name: string;
   /**
+   * Icono de la aplicación. Es una marca sin texto, así que acompaña al nombre pero no
+   * lo sustituye: por sí solo no dice qué producto es a quien llega por primera vez.
+   */
+  readonly logo: string;
+  /**
    * Qué es el producto, en una línea. Va debajo del nombre porque el nombre solo no
    * dice nada a quien llega de una búsqueda: aqui es donde viven las palabras por las
    * que la pagina se encuentra.

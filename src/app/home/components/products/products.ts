@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ProductSection } from './productSection/productSection';
 import { Product } from './types/product.types';
 
+import { PRODUCT_LOGOS } from '../../../common/brand/product-logos';
 import { Reveal } from '../../../common/directives/reveal';
 
 @Component({
@@ -16,6 +17,7 @@ export class Products {
       id: 'pos-dian',
       eyebrow: 'Punto de venta',
       name: 'Zemli',
+      logo: PRODUCT_LOGOS['/pos'].onLight,
       tagline: 'POS con facturación electrónica DIAN',
       description:
         'Un punto de venta pensado para el comercio colombiano: factura electrónica validada ante la DIAN en segundos, control de inventario y reportes de ventas en un solo lugar.',
@@ -51,42 +53,10 @@ export class Products {
       },
     },
     {
-      id: 'agentes-ia',
-      eyebrow: 'Atención al cliente',
-      name: 'Soy Alondra',
-      tagline: 'Agentes de IA para soporte y atención',
-      description:
-        'Agentes de inteligencia artificial que responden, agendan y resuelven por WhatsApp, chat web y llamadas — disponibles 24/7 y con escalamiento a un humano cuando lo necesitan.',
-      badges: ['WhatsApp, web y voz', 'Atención 24/7', 'Escala a una persona'],
-      features: [
-        'Atención 24/7 por WhatsApp, web y voz',
-        'Entrenado con la información de tu negocio',
-        'Escalamiento automático a un agente humano',
-        'Métricas de conversación y satisfacción',
-      ],
-      useCase:
-        'pensado para negocios que reciben muchas consultas repetitivas y quieren responder rápido sin crecer el equipo de soporte.',
-      cta: 'Conocer Soy Alondra',
-      ctaHref: '/agentes-ia',
-      artifact: 'agent',
-      photo: {
-        png: '/images/support-headphones.png',
-        // Mismas cuatro tallas que las demas: todas parten de un original de 1448px.
-        sources: [
-          { src: '/images/support-headphones-520.webp', width: 520 },
-          { src: '/images/support-headphones-760.webp', width: 760 },
-          { src: '/images/support-headphones-1040.webp', width: 1040 },
-          { src: '/images/support-headphones-1448.webp', width: 1448 },
-        ],
-        alt: 'Agente de soporte con diadema atendiendo clientes desde su portátil con ayuda de IA',
-        width: 1448,
-        height: 1448,
-      },
-    },
-    {
       id: 'plataforma-ventas',
       eyebrow: 'Ventas',
       name: 'Mesa Origen',
+      logo: PRODUCT_LOGOS['/plataforma-ventas'].onDark,
       tagline: 'Plataforma de ventas con agente de IA',
       description:
         'Centraliza todos tus canales de venta en un solo lugar y deja que un agente de IA califique leads, haga seguimiento y agende reuniones por ti.',
@@ -112,6 +82,40 @@ export class Products {
           { src: '/images/team-group-1448.webp', width: 1448 },
         ],
         alt: 'Equipo comercial revisando en laptop y celular el pipeline de ventas de Siwina',
+        width: 1448,
+        height: 1448,
+      },
+    },
+    {
+      id: 'agentes-ia',
+      eyebrow: 'Atención al cliente',
+      name: 'Soy Alondra',
+      logo: PRODUCT_LOGOS['/agentes-ia'].onDark,
+      tagline: 'Agentes de IA para soporte y atención',
+      description:
+        'Agentes de inteligencia artificial que responden, agendan y resuelven por WhatsApp, chat web y llamadas — disponibles 24/7 y con escalamiento a un humano cuando lo necesitan.',
+      badges: ['WhatsApp, web y voz', 'Atención 24/7', 'Escala a una persona'],
+      features: [
+        'Atención 24/7 por WhatsApp, web y voz',
+        'Entrenado con la información de tu negocio',
+        'Escalamiento automático a un agente humano',
+        'Métricas de conversación y satisfacción',
+      ],
+      useCase:
+        'pensado para negocios que reciben muchas consultas repetitivas y quieren responder rápido sin crecer el equipo de soporte.',
+      cta: 'Conocer Soy Alondra',
+      ctaHref: '/agentes-ia',
+      artifact: 'agent',
+      photo: {
+        png: '/images/support-headphones.png',
+        // Mismas cuatro tallas que las demas: todas parten de un original de 1448px.
+        sources: [
+          { src: '/images/support-headphones-520.webp', width: 520 },
+          { src: '/images/support-headphones-760.webp', width: 760 },
+          { src: '/images/support-headphones-1040.webp', width: 1040 },
+          { src: '/images/support-headphones-1448.webp', width: 1448 },
+        ],
+        alt: 'Agente de soporte con diadema atendiendo clientes desde su portátil con ayuda de IA',
         width: 1448,
         height: 1448,
       },

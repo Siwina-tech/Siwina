@@ -18,6 +18,12 @@ export class PageHero {
    * las otras seis es una etiqueta («Blog», «Contacto») que debe quedarse discreta.
    */
   readonly eyebrowIsProductName = input(false, { transform: booleanAttribute });
+
+  /**
+   * Icono de la aplicación, solo en las paginas de producto. Va junto al nombre, nunca
+   * en su lugar: es una marca sin texto y no se entiende sola.
+   */
+  readonly logoSrc = input<string | null>(null);
   readonly heading = input.required<string>();
   readonly lead = input.required<string>();
   readonly highlights = input<readonly string[]>([]);

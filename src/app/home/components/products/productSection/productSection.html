@@ -18,12 +18,27 @@
           Producto {{ indexLabel() }} / {{ product().eyebrow }}
         </p>
 
-        <h3
-          [class]="headingClass()"
-          class="text-[28px] leading-[1.08] font-extrabold tracking-[-0.035em] sm:text-[36px]"
-        >
-          {{ product().name }}
-        </h3>
+        <!-- El icono es decorativo aqui: el nombre va escrito justo al lado, asi que
+             anunciarlo tambien por voz solo repetiria la misma informacion. -->
+        <div class="flex items-center gap-3.5">
+          <img
+            [src]="product().logo"
+            alt=""
+            aria-hidden="true"
+            width="192"
+            height="192"
+            loading="lazy"
+            decoding="async"
+            class="h-12 w-12 shrink-0 sm:h-14 sm:w-14"
+          />
+
+          <h3
+            [class]="headingClass()"
+            class="text-[28px] leading-[1.08] font-extrabold tracking-[-0.035em] sm:text-[36px]"
+          >
+            {{ product().name }}
+          </h3>
+        </div>
 
         <p
           [class]="bodyClass()"

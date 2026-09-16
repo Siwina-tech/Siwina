@@ -11,6 +11,21 @@
     <ul class="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       @for (link of links(); track link.path; let i = $index) {
         <li [appReveal]="i * 70" class="tile group bg-white p-7">
+          <!-- Solo las tarjetas que llevan a un producto muestran icono. Es decorativo:
+               el nombre va justo debajo. -->
+          @if (logoFor(link.path); as logo) {
+            <img
+              [src]="logo"
+              alt=""
+              aria-hidden="true"
+              width="192"
+              height="192"
+              loading="lazy"
+              decoding="async"
+              class="mb-4 h-9 w-9"
+            />
+          }
+
           <h3 class="mb-2.5 text-[16.5px] leading-snug font-bold">
             <a [routerLink]="link.path" class="inline-flex items-center gap-2 text-brand">
               {{ link.label }}
